@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AuralIndex.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "AuralIndex.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

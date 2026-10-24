@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AuralIndex_App.Views.FeaturePlaceholderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Padding="24" RowDefinitions="Auto,*" RowSpacing="12">
+        <TextBlock
+            x:Name="DescriptionText"
+            MaxWidth="720"
+            TextWrapping="Wrap"
+            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        <Border
+            Grid.Row="1"
+            MaxWidth="720"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Padding="18"
+            BorderThickness="1"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+            CornerRadius="6">
+            <TextBlock
+                Text="Цей модуль додано до навігації. Його функціональність буде реалізована на наступних етапах розробки."
+                TextWrapping="Wrap" />
+        </Border>
+    </Grid>
+</Page>

@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>AuralIndex_App</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x86;x64;ARM64</Platforms>
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">win-$([System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString().ToLowerInvariant())</RuntimeIdentifier>
+    <PublishProfile Condition="Exists('Properties\PublishProfiles\win-$(Platform).pubxml')">win-$(Platform).pubxml</PublishProfile>
+    <UseWinUI>true</UseWinUI>
+    <WinUISDKReferences>false</WinUISDKReferences>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Views\AdvancedSearchPage.xaml" />
+    <None Remove="Views\BookDetailsPage.xaml" />
+    <None Remove="Views\BookEditPage.xaml" />
+    <None Remove="Views\CatalogPage.xaml" />
+    <None Remove="Views\FavoritesPage.xaml" />
+    <None Remove="Views\FeaturePlaceholderPage.xaml" />
+    <None Remove="Views\HistoryPage.xaml" />
+    <None Remove="Views\ImportExportPage.xaml" />
+    <None Remove="Views\RecommendationsPage.xaml" />
+    <None Remove="Views\SettingsPage.xaml" />
+    <None Remove="Views\StatisticsPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48_altform-lightunplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\AppIcon.ico" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\Icons\*.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.1839" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools.WinApp" Version="0.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AuralIndex.Application\AuralIndex.Application.csproj" />
+    <ProjectReference Include="..\AuralIndex.Infrastructure\AuralIndex.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\AdvancedSearchPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\BookDetailsPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\BookEditPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\CatalogPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\FavoritesPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\FeaturePlaceholderPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\HistoryPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\ImportExportPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\RecommendationsPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\SettingsPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+    <Page Update="Views\StatisticsPage.xaml"><Generator>MSBuild:Compile</Generator></Page>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
+    <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+    <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
+    <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
+  </PropertyGroup>
+</Project>

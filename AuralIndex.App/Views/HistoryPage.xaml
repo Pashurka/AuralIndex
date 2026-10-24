@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AuralIndex_App.Views.HistoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:local="using:AuralIndex_App.Views"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <Grid Padding="24" RowDefinitions="Auto,Auto" RowSpacing="18">
+            <Border Style="{StaticResource SurfaceCardStyle}" Padding="24">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="Історія" Style="{StaticResource HeroTitleStyle}" />
+                    <TextBlock
+                        Text="Історія фіксує пошукові запити, перегляди карток аудіокниг та зміни в каталозі. Це основа для майбутньої персоналізації рекомендацій."
+                        Style="{StaticResource HeroSubtitleStyle}" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Style="{StaticResource SurfaceCardStyle}">
+                <StackPanel Spacing="10">
+                    <TextBlock x:Name="SummaryText" Text="Останні події" Style="{StaticResource SectionTitleStyle}" />
+                    <ListView x:Name="HistoryList" ItemsSource="{x:Bind Entries, Mode=OneWay}" IsItemClickEnabled="True" ItemClick="OnEntryClick" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:HistoryRowVm">
+                                <Border Margin="0,4,0,0" Padding="14" Background="#FFFFFFFF" BorderBrush="{StaticResource BrandPanelBorderBrush}" BorderThickness="1" CornerRadius="14">
+                                    <Grid ColumnDefinitions="180,*,160" RowDefinitions="Auto,Auto" RowSpacing="6">
+                                        <Border Background="{StaticResource BrandWarmBrush}" CornerRadius="10" Padding="10,4" HorizontalAlignment="Left">
+                                            <TextBlock Text="{x:Bind EventTypeLabel}" Foreground="{StaticResource BrandAccentStrongBrush}" FontWeight="SemiBold" />
+                                        </Border>
+                                        <TextBlock Grid.Column="1" Text="{x:Bind Title}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                        <TextBlock Grid.Column="2" Text="{x:Bind CreatedAtText}" HorizontalAlignment="Right" Foreground="{StaticResource BrandMutedTextBrush}" />
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{x:Bind Description}" TextWrapping="Wrap" Foreground="{StaticResource BrandMutedTextBrush}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>

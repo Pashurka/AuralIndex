@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AuralIndex_App.Views.BookDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:local="using:AuralIndex_App.Views"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <Grid Padding="24" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="18">
+            <Border Style="{StaticResource SurfaceCardStyle}" Padding="24">
+                <Grid ColumnDefinitions="92,*,Auto" RowDefinitions="Auto,Auto" RowSpacing="12" ColumnSpacing="18">
+                    <Border Background="{StaticResource BrandWarmBrush}" CornerRadius="22" Padding="12" Grid.RowSpan="2">
+                        <Grid RowDefinitions="Auto,*">
+                            <TextBlock x:Name="CoverGenreText" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource BrandAccentStrongBrush}" HorizontalAlignment="Center" />
+                            <TextBlock x:Name="CoverInitialsText" Grid.Row="1" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+
+                    <StackPanel Grid.Column="1" Spacing="8">
+                        <TextBlock x:Name="TitleText" Style="{StaticResource HeroTitleStyle}" />
+                        <TextBlock x:Name="AuthorText" FontSize="18" Foreground="{StaticResource BrandMutedTextBrush}" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Top">
+                        <Button x:Name="FavoriteButton" Content="Додати в обране" Style="{StaticResource SecondaryActionButtonStyle}" Click="OnFavoriteClick" />
+                        <Button x:Name="ListenedStatusButton" Content="Позначити як прослухану" Style="{StaticResource SecondaryActionButtonStyle}" Click="OnListenedStatusClick" />
+                        <Button Content="Редагувати" Style="{StaticResource SecondaryActionButtonStyle}" Click="OnEditClick" />
+                        <Button Content="Видалити" Style="{StaticResource SecondaryActionButtonStyle}" Click="OnDeleteClick" />
+                    </StackPanel>
+
+                    <InfoBar Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="NotFoundBar" IsOpen="False" Severity="Error" Title="Аудіокнигу не знайдено" Message="Запис відсутній у локальній базі даних." />
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" ColumnDefinitions="1.05*,1.35*" ColumnSpacing="18">
+                <Border Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Метадані" Style="{StaticResource SectionTitleStyle}" />
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="160,*" RowSpacing="10">
+                            <TextBlock Text="Жанр" FontWeight="SemiBold" />
+                            <TextBlock x:Name="GenreText" Grid.Column="1" TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="1" Text="Мова" FontWeight="SemiBold" />
+                            <TextBlock x:Name="LanguageText" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="2" Text="Рік" FontWeight="SemiBold" />
+                            <TextBlock x:Name="YearText" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="3" Text="Диктор" FontWeight="SemiBold" />
+                            <TextBlock x:Name="NarratorText" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="4" Text="Тривалість" FontWeight="SemiBold" />
+                            <TextBlock x:Name="DurationText" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="5" Text="Статус" FontWeight="SemiBold" />
+                            <Border Grid.Row="5" Grid.Column="1" Background="{StaticResource BrandWarmBrush}" CornerRadius="10" Padding="10,4" HorizontalAlignment="Left">
+                                <TextBlock x:Name="ListenedText" Foreground="{StaticResource BrandAccentStrongBrush}" FontWeight="SemiBold" />
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Опис" Style="{StaticResource SectionTitleStyle}" />
+                        <Border Padding="16" Background="#FFFFFFFF" BorderBrush="{StaticResource BrandPanelBorderBrush}" BorderThickness="1" CornerRadius="14">
+                            <TextBlock x:Name="DescriptionText" TextWrapping="Wrap" />
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="2" Style="{StaticResource SurfaceCardStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="Схожі аудіокниги" Style="{StaticResource SectionTitleStyle}" />
+                    <ListView x:Name="RecommendationsList" ItemsSource="{x:Bind Recommendations, Mode=OneWay}" IsItemClickEnabled="True" ItemClick="OnRecommendationClick" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:RecommendationRowVm">
+                                <Border Margin="0,4,0,0" Padding="14" Background="#FFFFFFFF" BorderBrush="{StaticResource BrandPanelBorderBrush}" BorderThickness="1" CornerRadius="14">
+                                    <Grid ColumnDefinitions="60,*" ColumnSpacing="14">
+                                        <Border Background="{StaticResource BrandWarmBrush}" CornerRadius="16" Padding="8">
+                                            <Grid RowDefinitions="Auto,*">
+                                                <TextBlock Text="{x:Bind GenreMark}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource BrandAccentStrongBrush}" HorizontalAlignment="Center" />
+                                                <TextBlock Grid.Row="1" Text="{x:Bind CoverInitials}" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Grid>
+                                        </Border>
+
+                                        <Grid Grid.Column="1" ColumnDefinitions="3*,2*,1.5*,1.2*">
+                                            <TextBlock Text="{x:Bind Title}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                            <TextBlock Grid.Column="1" Text="{x:Bind Author}" TextWrapping="Wrap" />
+                                            <TextBlock Grid.Column="2" Text="{x:Bind Genre}" TextWrapping="Wrap" />
+                                            <Border Grid.Column="3" Background="{StaticResource BrandWarmBrush}" CornerRadius="10" Padding="10,4" HorizontalAlignment="Left">
+                                                <TextBlock Text="{x:Bind MatchText}" Foreground="{StaticResource BrandAccentStrongBrush}" FontWeight="SemiBold" />
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock x:Name="NoRecommendationsText" Text="Схожих аудіокниг поки не знайдено." Foreground="{StaticResource BrandMutedTextBrush}" Visibility="Collapsed" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="3" Background="#00FFFFFF" />
+        </Grid>
+    </ScrollViewer>
+</Page>

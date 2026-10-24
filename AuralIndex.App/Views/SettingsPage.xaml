@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AuralIndex_App.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <Grid Padding="24" RowDefinitions="Auto,Auto,Auto" RowSpacing="18">
+            <Border Style="{StaticResource SurfaceCardStyle}" Padding="24">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="Налаштування алгоритмів" Style="{StaticResource HeroTitleStyle}" />
+                    <TextBlock
+                        Text="Налаштування дозволяють керувати вагами інтелектуального пошуку та рекомендацій без зміни коду. Це зручно для демонстрації й порівняння різних сценаріїв ранжування."
+                        Style="{StaticResource HeroSubtitleStyle}" />
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="18">
+                <Border Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Пошук" Style="{StaticResource SectionTitleStyle}" />
+                        <Grid ColumnDefinitions="*,120" RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="10">
+                            <TextBlock Text="Точний збіг у назві" />
+                            <NumberBox x:Name="SearchTitleExactBox" Grid.Column="1" />
+                            <TextBlock Grid.Row="1" Text="Початок назви" />
+                            <NumberBox x:Name="SearchTitleStartsWithBox" Grid.Row="1" Grid.Column="1" />
+                            <TextBlock Grid.Row="2" Text="Частковий збіг у назві" />
+                            <NumberBox x:Name="SearchTitleContainsBox" Grid.Row="2" Grid.Column="1" />
+                            <TextBlock Grid.Row="3" Text="Автор" />
+                            <NumberBox x:Name="SearchAuthorExactBox" Grid.Row="3" Grid.Column="1" />
+                            <TextBlock Grid.Row="4" Text="Жанр" />
+                            <NumberBox x:Name="SearchGenreExactBox" Grid.Row="4" Grid.Column="1" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Схожість і персоналізація" Style="{StaticResource SectionTitleStyle}" />
+                        <Grid ColumnDefinitions="*,120" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="10">
+                            <TextBlock Text="Однаковий жанр" />
+                            <NumberBox x:Name="RecommendationGenreBox" Grid.Column="1" />
+                            <TextBlock Grid.Row="1" Text="Однакова мова" />
+                            <NumberBox x:Name="RecommendationLanguageBox" Grid.Row="1" Grid.Column="1" />
+                            <TextBlock Grid.Row="2" Text="Той самий автор" />
+                            <NumberBox x:Name="RecommendationAuthorBox" Grid.Row="2" Grid.Column="1" />
+                            <TextBlock Grid.Row="3" Text="Буст від обраного" />
+                            <NumberBox x:Name="PersonalizedFavoriteBoostBox" Grid.Row="3" Grid.Column="1" />
+                            <TextBlock Grid.Row="4" Text="Буст від переглядів" />
+                            <NumberBox x:Name="PersonalizedViewStartBoostBox" Grid.Row="4" Grid.Column="1" />
+                            <TextBlock Grid.Row="5" Text="Перевага жанру" />
+                            <NumberBox x:Name="PersonalizedGenrePreferenceBox" Grid.Row="5" Grid.Column="1" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel Grid.Row="2" Spacing="14">
+                <InfoBar x:Name="StatusBar" IsOpen="False" Severity="Success" Title="Налаштування оновлено" Message="Нові ваги збережені. Пошук і рекомендації використовуватимуть їх у наступних запитах." />
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Button Content="Зберегти" Style="{StaticResource PrimaryActionButtonStyle}" Click="OnSaveClick" />
+                    <Button Content="Скинути до стандартних" Style="{StaticResource SecondaryActionButtonStyle}" Click="OnResetClick" />
+                    <Button Content="Оновити збережені значення" Style="{StaticResource SecondaryActionButtonStyle}" Click="OnReloadClick" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

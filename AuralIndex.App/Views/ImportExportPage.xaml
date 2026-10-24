@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AuralIndex_App.Views.ImportExportPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <Grid Padding="24" RowDefinitions="Auto,Auto,Auto" RowSpacing="18">
+            <Border Style="{StaticResource SurfaceCardStyle}" Padding="24">
+                <StackPanel Spacing="12">
+                    <TextBlock Text="Імпорт / експорт" Style="{StaticResource HeroTitleStyle}" />
+                    <TextBlock
+                        Text="Імпорт і експорт дозволяють переносити локальний каталог між середовищами, створювати резервні копії й швидко наповнювати базу тестовими даними."
+                        Style="{StaticResource HeroSubtitleStyle}" />
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="18">
+                <Border Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Експорт" Style="{StaticResource SectionTitleStyle}" />
+                        <TextBlock Text="Шлях до JSON-файлу" Foreground="{StaticResource BrandMutedTextBrush}" />
+                        <TextBox x:Name="ExportJsonPathBox" />
+                        <Button Content="Експортувати в JSON" Style="{StaticResource PrimaryActionButtonStyle}" Click="OnExportJsonClick" />
+                        <TextBlock Text="Шлях до CSV-файлу" Foreground="{StaticResource BrandMutedTextBrush}" />
+                        <TextBox x:Name="ExportCsvPathBox" />
+                        <Button Content="Експортувати в CSV" Style="{StaticResource SecondaryActionButtonStyle}" Click="OnExportCsvClick" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Імпорт" Style="{StaticResource SectionTitleStyle}" />
+                        <CheckBox x:Name="ReplaceExistingCheckBox" Content="Очистити каталог перед імпортом" />
+                        <TextBlock Text="Шлях до JSON-файлу" Foreground="{StaticResource BrandMutedTextBrush}" />
+                        <TextBox x:Name="ImportJsonPathBox" />
+                        <Button Content="Імпортувати з JSON" Style="{StaticResource PrimaryActionButtonStyle}" Click="OnImportJsonClick" />
+                        <TextBlock Text="Шлях до CSV-файлу" Foreground="{StaticResource BrandMutedTextBrush}" />
+                        <TextBox x:Name="ImportCsvPathBox" />
+                        <Button Content="Імпортувати з CSV" Style="{StaticResource SecondaryActionButtonStyle}" Click="OnImportCsvClick" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel Grid.Row="2" Spacing="14">
+                <InfoBar x:Name="StatusBar" IsOpen="False" Severity="Success" Title="Операцію виконано" Message="Результат імпорту або експорту буде показано тут." />
+                <Border Style="{StaticResource SurfaceCardStyle}">
+                    <TextBlock Text="Порада: зручно використовувати окрему папку, наприклад Documents\AuralIndex\Transfers, для всіх файлів JSON і CSV." TextWrapping="Wrap" />
+                </Border>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>
